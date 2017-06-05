@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import com.pooja.snm.SalesUtils;
 import com.pooja.snm.core.MessageProcessor;
 import com.pooja.snm.core.MessageType;
@@ -21,6 +23,9 @@ public class MsgProcessorTwoImpl implements MessageProcessor {
 
 	public void process(String message) {
 		List<String> tokens = SalesUtils.getTokens(MessageType.TWO.getPattern(), message);
+		if (CollectionUtils.isEmpty(tokens)) {
+			return;
+		}
 		String productName = tokens.get(2);
 		int quantity = Integer.valueOf(tokens.get(1));
 		long saleValue = Long.valueOf(tokens.get(3));

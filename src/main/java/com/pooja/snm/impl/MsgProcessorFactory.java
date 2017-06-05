@@ -6,17 +6,19 @@ import com.pooja.snm.core.ProcessCache;
 
 public class MsgProcessorFactory {
 	
-  private final static ProcessCache processCache = ProcessCache.getInstance();
+//  private final static ProcessCache processCache = ProcessCache.getInstance();
 	
-	private final static  MsgProcessorOneImpl processorOne = new MsgProcessorOneImpl(processCache);
-	private final static  MsgProcessorTwoImpl processorTwo = new MsgProcessorTwoImpl(processCache);
-	private final static  MsgProcessorThreeImpl processorThree  = new MsgProcessorThreeImpl(processCache);
+	private final  MsgProcessorOneImpl processorOne ;
+	private final   MsgProcessorTwoImpl processorTwo ;
+	private final   MsgProcessorThreeImpl processorThree;
 		
-	MsgProcessorFactory(){
-		
+	public MsgProcessorFactory(ProcessCache processCache){
+		processorOne = new MsgProcessorOneImpl(processCache); 
+		processorTwo = new MsgProcessorTwoImpl(processCache);
+		processorThree = new MsgProcessorThreeImpl(processCache);
 	}
 	
-	public static MessageProcessor getMessageProcessor(MessageType messageType){
+	public  MessageProcessor getMessageProcessor(MessageType messageType){
 		 switch(messageType){
 		 
 		 case ONE: return processorOne;
@@ -32,9 +34,9 @@ public class MsgProcessorFactory {
 
 
 
-	public static ProcessCache getProcesscache() {
-		return processCache;
-	}
+//	public static ProcessCache getProcesscache() {
+//		return processCache;
+//	}
 
 	
 }

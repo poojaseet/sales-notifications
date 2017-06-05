@@ -14,14 +14,17 @@ import com.pooja.snm.model.Sale;
 
 public class ReportGenerator {
 
-	private static ProcessCache processCache = ProcessCache.getInstance();
+	private ProcessCache processCache ;
 
 	private PrintStream outputChannel;
 
-	public ReportGenerator(PrintStream output) {
+	public ReportGenerator(PrintStream output, ProcessCache processCache) {
 		outputChannel = output;
+		this.processCache = processCache;
 	}
-
+/**
+ * Generates Interval Report after Sepecified time.
+ */
 	public void generateIntervalReport() {
 		Map<String, List<Sale>> sales = processCache.getSales();
 		outputChannel.println("Interval Report generated");
@@ -39,6 +42,9 @@ public class ReportGenerator {
 
 	}
 
+	/**
+	 * Generated Cumulative/Final report . Writes output in outputchannel.
+	 */
 	public void generateFinalReport() {
 		Map<String, List<Adjustment>> adjustments = processCache.getAdjustments();
 		outputChannel.println("Pausing to generate report");

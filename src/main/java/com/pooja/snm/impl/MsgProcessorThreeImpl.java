@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.CollectionUtils;
-
 import com.pooja.snm.Operation;
 import com.pooja.snm.SalesUtils;
 import com.pooja.snm.core.MessageProcessor;
@@ -52,15 +50,14 @@ public class MsgProcessorThreeImpl implements MessageProcessor {
 	private void getAdjustments(Operation operation, long saleValue, List<Sale> salesOfProduct) {
 		switch (operation) {
 		case ADD:
-			salesOfProduct.forEach(sale -> sale.setProductValue(sale.getProductValue() + saleValue));
-			
+			salesOfProduct.forEach(sale -> sale.setProductValue(sale.getProductValue() + saleValue));			
 			break;
 
 		case SUBTRACT:
 			salesOfProduct.forEach(sale -> sale.setProductValue(sale.getProductValue() - saleValue));
 			break;
 		case MULTIPLY:
-			salesOfProduct.forEach(sale -> sale.setProductValue(sale.getProductValue() * saleValue));
+			salesOfProduct.forEach(sale -> sale.setProductValue(Math.round(sale.getProductValue() * saleValue)));
 
 			break;
 		default:

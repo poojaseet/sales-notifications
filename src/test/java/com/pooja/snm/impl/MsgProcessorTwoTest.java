@@ -7,21 +7,21 @@ import org.junit.Test;
 
 import com.pooja.snm.core.ProcessCache;
 
-public class MsgProcessorOneTest {
+public class MsgProcessorTwoTest {
 	
-	private MsgProcessorOneImpl tested;
+	private MsgProcessorTwoImpl tested;
 	
 	private ProcessCache processCache;
 	
 	@Before
 	public void beforeEachTest() {
 		processCache = new ProcessCache();
-		tested = new MsgProcessorOneImpl(processCache);
+		tested = new MsgProcessorTwoImpl(processCache);
 	}
 
 	@Test
 	public void whenFirstValidMessageAddedThenCacheSizeis1() {
-		tested.process("apple at 10p");
+		tested.process("20 sales of oranges at 10p each");
 		assertEquals(processCache.getSales().size(),1);		
 	}
 	
@@ -33,10 +33,10 @@ public class MsgProcessorOneTest {
 	
 	@Test
 	public void when2SameTypeProductAddedThenCacheValueSizeAdded() {
-		tested.process("apple at 10p");
-		tested.process("apple at 10p");
+		tested.process("20 sales of oranges at 10p each");
+		tested.process("10 sales of oranges at 20p each");
 		assertEquals(processCache.getSales().size(),1);		
-		assertEquals(processCache.getSales().get("apple").size(),2);
+		assertEquals(processCache.getSales().get("orange").size(),2);
 	}
 	
 	

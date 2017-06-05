@@ -9,11 +9,11 @@ import com.pooja.snm.model.Sale;
 
 public class ProcessCache {
 
-	private  static Map<String, List<Sale>> sales;
+	private final  Map<String, List<Sale>> sales;
 
-	private  static Map<String, List<Adjustment>> adjustments;
+	private  final Map<String, List<Adjustment>> adjustments;
 		
-	private ProcessCache(){
+	public ProcessCache(){
 		sales = new HashMap<String, List<Sale>>();
 		adjustments = new HashMap<String, List<Adjustment>>();
 	}
@@ -26,19 +26,7 @@ public class ProcessCache {
 		return adjustments;
 	}
 	
-	private static class ProcessCacheHelper{
-		private static final ProcessCache instance =  new ProcessCache();
-		
-	}
-	
-	public static ProcessCache getInstance(){
-		return ProcessCacheHelper.instance;
-	}
-	
-	public  static void clearCache(){
-		sales.clear();
-		adjustments.clear();
-	}
+
 	
 	
 	

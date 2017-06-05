@@ -1,6 +1,5 @@
 package com.pooja.snm.core;
 
-import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -23,6 +22,7 @@ public class ApplicationManager {
 			application.getNotificationManager().process(message);
 			
 		}
+		scanner.close();
 	}
 
 	public NotificationManager getNotificationManager() {

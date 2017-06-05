@@ -11,12 +11,12 @@ public enum MessageType {
 	
 	THREE(3,Pattern.compile("(Add|Subtract|Multiply)\\s(\\d+)p?\\s(\\w+)s$", Pattern.CASE_INSENSITIVE));
 	
-	private int message;
+	private int messageCode;
 	
 	private Pattern pattern;
 	
 	private MessageType(int messageValue, Pattern patternValue){
-		message = messageValue;
+		messageCode = messageValue;
 		pattern = patternValue;
 	}
 	
@@ -32,5 +32,9 @@ public enum MessageType {
 
 	public Pattern getPattern(){
 		return pattern;
+	}
+	
+	public int getMessageCode(){
+		return messageCode;
 	}
 }

@@ -1,8 +1,11 @@
 package com.pooja.snm.impl;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 import com.pooja.snm.SalesUtils;
 import com.pooja.snm.core.MessageProcessor;
@@ -20,11 +23,13 @@ public class MsgProcessorOneImpl implements MessageProcessor {
 
 	public void process(String message) {
 		List<String> tokens = SalesUtils.getTokens(MessageType.ONE.getPattern(), message);
+		if (CollectionUtils.isEmpty(tokens)) {
+			return;
+		}
 		String productName = tokens.get(1);
 		long saleValue = Long.valueOf(tokens.get(2));
 		Map<String, List<Sale>> sales = processCache.getSales();
 
-		
 		List<Sale> salesOfproduct = null;
 
 		if (sales.containsKey(productName)) {
@@ -36,7 +41,7 @@ public class MsgProcessorOneImpl implements MessageProcessor {
 		}
 		salesOfproduct.add(new Sale(new Product(productName), saleValue, 1));
 		sales.put(productName, salesOfproduct);
-        
+
 	}
 
 }
